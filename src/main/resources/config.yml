@@ -1,0 +1,45 @@
+#Items that cannot be placed inside chests
+Anti-Chest:
+  - 'WOOD_SWORD'
+  - 'WOOD_PICKAXE'
+  - 'IRON_PICKAXE'
+  - 'GOLD_PICKAXE'
+  - 'DIAMOND_PICKAXE'
+  - 'WOOD_AXE'
+  - 'STONE_AXE'
+  - 'IRON_AXE'
+  - 'DIAMOND_AXE'
+  - 'SHEARS'
+
+#Items that cannot be dropped on the ground
+Anti-Drop:
+  enabled: true
+  list:
+    - 'WOOD_SWORD'
+    - 'WOODEN_SWORD'
+    - 'WOOD_PICKAXE'
+    - 'WOODEN_PICKAXE'
+    - 'IRON_PICKAXE'
+    - 'GOLD_PICKAXE'
+    - 'DIAMOND_PICKAXE'
+    - 'WOOD_AXE'
+    - 'WOODEN_AXE'
+    - 'STONE_AXE'
+    - 'IRON_AXE'
+    - 'DIAMOND_AXE'
+    - 'SHEARS'
+
+#Players will always have a sword if this is enabled
+#Gives you a Wooden Sword if no sword is detected
+Advanced-Sword-Drop:
+  enabled: true
+  list:
+    - 'STONE_SWORD'
+    - 'IRON_SWORD'
+    - 'DIAMOND_SWORD'
+
+#Removes a Wooden-Sword if you buy a better sword
+#If 'all-type' is set to true, all sword types will get replaced.
+Replace-Sword-On-Buy:
+  enabled: true
+  all-type: false
