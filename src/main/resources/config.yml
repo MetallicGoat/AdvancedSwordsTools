@@ -1,11 +1,14 @@
 #Items that cannot be placed inside chests
 Anti-Chest:
   - 'WOOD_SWORD'
+  - 'WOODEN_SWORD'
   - 'WOOD_PICKAXE'
+  - 'WOODEN_PICKAXE'
   - 'IRON_PICKAXE'
   - 'GOLD_PICKAXE'
   - 'DIAMOND_PICKAXE'
   - 'WOOD_AXE'
+  - 'WOODEN_AXE'
   - 'STONE_AXE'
   - 'IRON_AXE'
   - 'DIAMOND_AXE'
@@ -28,6 +31,10 @@ Anti-Drop:
     - 'IRON_AXE'
     - 'DIAMOND_AXE'
     - 'SHEARS'
+
+Advanced-Tool-Replacement:
+  enabled: true
+  problem: 'You already have a higher tier'
 
 #Players will always have a sword if this is enabled
 #Gives you a Wooden Sword if no sword is detected

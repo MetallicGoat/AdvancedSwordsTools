@@ -1,6 +1,6 @@
 main: me.metallicgoat.AdvancedSwordsTools.Main
 name: AdvancedSwordsTools
-version: 1.0-Beta6
+version: 1.0-Beta7
 author: MetallicGoat
 depend: [MBedwars]
 api-version: 1.13

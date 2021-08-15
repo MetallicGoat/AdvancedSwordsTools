@@ -41,6 +41,7 @@ public class AlwaysSword implements Listener {
                             }
                         }
                         // Give player a wood sword if they don't have one
+                        //TODO: InventoryClickEvent.getCurrentItem()" is null 45
                     } else if (i == 0 &&
                             !e.getCurrentItem().getType().name().endsWith("SWORD") &&
                             !e.getCursor().getType().name().endsWith("SWORD")) {

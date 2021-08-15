@@ -6,20 +6,8 @@
 
     <groupId>me.metallicgoat</groupId>
     <artifactId>AdvancedSwordsTools</artifactId>
-    <version>1.0-Beta6</version>
+    <version>1.0-Beta7</version>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <repositories>
         <repository>
             <id>spigot-repo</id>

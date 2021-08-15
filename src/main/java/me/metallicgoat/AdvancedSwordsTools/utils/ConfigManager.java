@@ -43,4 +43,14 @@ public class ConfigManager implements Config {
         return plugin.getConfig().getBoolean("Replace-Sword-On-Buy.all-type");
     }
 
+
+    @Override
+    public boolean getToolBuy() {
+        return plugin.getConfig().getBoolean("Advanced-Tool-Replacement.enabled");
+    }
+
+    @Override
+    public String getToolBuyProblem() {
+        return plugin.getConfig().getString("Advanced-Tool-Replacement.problem");
+    }
 }

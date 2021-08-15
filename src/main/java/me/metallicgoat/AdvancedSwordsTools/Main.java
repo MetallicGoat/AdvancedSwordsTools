@@ -61,6 +61,7 @@ public class Main extends JavaPlugin {
         manager.registerEvents(new AntiDrop(), this);
         manager.registerEvents(new SwordBuy(), this);
         manager.registerEvents(new SwordDrop(), this);
+        manager.registerEvents(new ToolBuy(), this);
     }
 
 

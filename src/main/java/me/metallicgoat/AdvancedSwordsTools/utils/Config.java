@@ -18,4 +18,8 @@ public interface Config {
 
     boolean getSwordReplaceType();
 
+    String getToolBuyProblem();
+
+    boolean getToolBuy();
+
 }
