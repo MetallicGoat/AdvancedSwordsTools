@@ -16,12 +16,14 @@ public class AntiChest implements Listener {
 
     @EventHandler
     public void onShiftClick(InventoryClickEvent e) {
-        if (e.getClick().isShiftClick() && inArena((Player) e.getWhoClicked())) {
-            Inventory clicked = e.getClickedInventory();
-            if (clicked == e.getWhoClicked().getInventory()) {
-                ItemStack clickedOn = e.getCurrentItem();
-                if (clickedOn != null && (getAntiChest().contains(clickedOn.getType().name()))) {
-                    e.setCancelled(true);
+        if(e.getInventory().getSize() > 26) {
+            if (e.getClick().isShiftClick() && inArena((Player) e.getWhoClicked())) {
+                Inventory clicked = e.getClickedInventory();
+                if (clicked == e.getWhoClicked().getInventory()) {
+                    ItemStack clickedOn = e.getCurrentItem();
+                    if (clickedOn != null && (getAntiChest().contains(clickedOn.getType().name()))) {
+                        e.setCancelled(true);
+                    }
                 }
             }
         }
@@ -29,11 +31,13 @@ public class AntiChest implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         Inventory clicked = e.getClickedInventory();
-        if (clicked != e.getWhoClicked().getInventory() && inArena((Player) e.getWhoClicked())) {
-            // The cursor item is going into the top inventory
-            ItemStack onCursor = e.getCursor();
-            if (onCursor != null && (getAntiChest().contains(onCursor.getType().name()))){
-                e.setCancelled(true);
+        if(e.getInventory().getSize() > 26) {
+            if (clicked != e.getWhoClicked().getInventory() && inArena((Player) e.getWhoClicked())) {
+                // The cursor item is going into the top inventory
+                ItemStack onCursor = e.getCursor();
+                if (onCursor != null && (getAntiChest().contains(onCursor.getType().name()))) {
+                    e.setCancelled(true);
+                }
             }
         }
     }

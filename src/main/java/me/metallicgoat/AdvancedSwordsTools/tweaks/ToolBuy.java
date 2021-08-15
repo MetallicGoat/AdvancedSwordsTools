@@ -25,11 +25,13 @@ public class ToolBuy implements Listener {
                 if (rawProduct instanceof ItemShopProduct) {
                     final ItemStack[] is = ((ItemShopProduct) rawProduct).getItemStacks();
                     for (ItemStack item : is) {
-                        if (item.getType().name().contains("AXE") && !isPurchasable(item, pi)) {
-                            addShopProblem(e);
-                        } else {
-                            if (e.getProblems().isEmpty()) {
-                                clearOld(item.getType(), p);
+                        if (item.getType().name().contains("AXE")) {
+                            if (!isPurchasable(item, pi)) {
+                                addShopProblem(e);
+                            } else {
+                                if (e.getProblems().isEmpty()) {
+                                    clearOld(item.getType(), p);
+                                }
                             }
                         }
                     }

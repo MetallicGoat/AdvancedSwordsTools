@@ -17,7 +17,7 @@ public class AntiDrop implements Listener {
         Arena arena = BedwarsAPI.getGameAPI().getArenaByPlayer(p);
         // If player is trying to dop a tool he shouldn't, cancel event
         if(arena != null) {
-            if (antiDropList().contains(e.getItemDrop().getType().name()) && antiDrop()) {
+            if (antiDropList().contains(e.getItemDrop().getItemStack().getType().name()) && antiDrop()) {
                 e.setCancelled(true);
             }
         }
