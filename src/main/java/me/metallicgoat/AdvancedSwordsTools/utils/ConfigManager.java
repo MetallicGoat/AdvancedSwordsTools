@@ -53,4 +53,20 @@ public class ConfigManager implements Config {
     public String getToolBuyProblem() {
         return plugin.getConfig().getString("Advanced-Tool-Replacement.problem");
     }
+
+    @Override
+    public boolean getOrderedSwordBuy() {
+        return plugin.getConfig().getBoolean("Ordered-Sword-Buy.enabled");
+    }
+
+    @Override
+    public String getOrderedSwordBuyProblem() {
+        return plugin.getConfig().getString("Ordered-Sword-Buy.problem");
+    }
+
+    @Override
+    public List<String> getIgnoreList(){
+        return plugin.getConfig().getStringList("Do-Not-Effect");
+    }
+
 }

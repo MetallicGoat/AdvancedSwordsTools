@@ -16,18 +16,17 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ToolBuy implements Listener {
+public class OrderedSwordBuy implements Listener {
     @EventHandler
-    public void onToolBuy(PlayerBuyInShopEvent e){
+    public void onSwordBuy(PlayerBuyInShopEvent e){
         Player p = e.getPlayer();
         PlayerInventory pi = p.getInventory();
-        if(toolBuy()) {
+        if(swordBuy()) {
             for (ShopProduct rawProduct : e.getItem().getProducts()) {
                 if (rawProduct instanceof ItemShopProduct) {
                     final ItemStack[] is = ((ItemShopProduct) rawProduct).getItemStacks();
                     for (ItemStack item : is) {
-                        if (item.getType().name().contains("AXE") &&
-                                IgnoreItemStack.isNotToIgnore(item)) {
+                        if (item.getType().name().contains("SWORD") && IgnoreItemStack.isNotToIgnore(item)) {
                             if (!isPurchasable(item, pi)) {
                                 addShopProblem(e);
                             } else {
@@ -43,24 +42,16 @@ public class ToolBuy implements Listener {
     }
 
     private void clearOld(Material tool, Player p){
-        boolean pickaxe = tool.name().contains("PICKAXE");
         p.getInventory().forEach(itemStack -> {
-            if(itemStack != null && itemStack.getType().name().contains("AXE")){
-                if(itemStack.getType().name().contains("PICK")){
-                    if(getToolLevel(tool.name()) > getToolLevel(itemStack.getType().name())){
-                        p.getInventory().remove(itemStack.getType());
-                    }
-                }else if(!pickaxe){
-                    if(getToolLevel(tool.name()) > getToolLevel(itemStack.getType().name())){
-                        p.getInventory().remove(itemStack.getType());
-                    }
+            if(itemStack != null){
+                if(getSwordLevel(tool.name()) > getSwordLevel(itemStack.getType().name())){
+                    p.getInventory().remove(itemStack.getType());
                 }
             }
         });
     }
 
     private boolean isPurchasable(ItemStack product, PlayerInventory pi){
-        boolean pickaxe = product.getType().name().contains("PICKAXE");
         AtomicBoolean purchasable = new AtomicBoolean(true);
 
         if(pi.contains(product.getType())){
@@ -68,15 +59,9 @@ public class ToolBuy implements Listener {
         }
         pi.forEach(itemStack -> {
             if(itemStack != null) {
-                if (itemStack.getType().name().contains("AXE")) {
-                    if (itemStack.getType().name().contains("PICKAXE") && pickaxe) {
-                        if (getToolLevel(itemStack.getType().name()) > getToolLevel(product.getType().name())) {
-                            purchasable.set(false);
-                        }
-                    } else if (!itemStack.getType().name().contains("PICKAXE") && !pickaxe) {
-                        if (getToolLevel(itemStack.getType().name()) > getToolLevel(product.getType().name())) {
-                            purchasable.set(false);
-                        }
+                if (itemStack.getType().name().contains("SWORD")) {
+                    if (getSwordLevel(itemStack.getType().name()) > getSwordLevel(product.getType().name())) {
+                        purchasable.set(false);
                     }
                 }
             }
@@ -85,7 +70,7 @@ public class ToolBuy implements Listener {
         return purchasable.get();
     }
 
-    private int getToolLevel(String tool){
+    private int getSwordLevel(String tool){
         if(tool.contains("WOOD")){
             return 1;
         }else if(tool.contains("STONE")){
@@ -112,16 +97,16 @@ public class ToolBuy implements Listener {
 
             @Override
             public void handleNotification(PlayerBuyInShopEvent e) {
-                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', toolBuyProblem()));
+                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', getOrderedSwordBuyProblem()));
             }
         });
     }
 
-    private boolean toolBuy() {
-        return Main.getConfigManager().getToolBuy();
+    private boolean swordBuy() {
+        return Main.getConfigManager().getOrderedSwordBuy();
     }
 
-    private String toolBuyProblem() {
-        return Main.getConfigManager().getToolBuyProblem();
+    private String getOrderedSwordBuyProblem() {
+        return Main.getConfigManager().getOrderedSwordBuyProblem();
     }
 }

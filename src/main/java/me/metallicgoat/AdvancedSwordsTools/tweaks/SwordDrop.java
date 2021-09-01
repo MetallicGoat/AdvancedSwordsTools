@@ -3,6 +3,8 @@ package me.metallicgoat.AdvancedSwordsTools.tweaks;
 import de.marcely.bedwars.api.BedwarsAPI;
 import de.marcely.bedwars.api.arena.Arena;
 import me.metallicgoat.AdvancedSwordsTools.Main;
+import me.metallicgoat.AdvancedSwordsTools.utils.IgnoreItemStack;
+import me.metallicgoat.AdvancedSwordsTools.utils.XMaterial;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,24 +15,26 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SwordDrop implements Listener {
 
     @EventHandler
     public void giveSwordOnDrop(PlayerDropItemEvent e){
-        Main plugin = Main.getInstance();
         Player p = e.getPlayer();
         Arena arena = BedwarsAPI.getGameAPI().getArenaByPlayer(p);
         PlayerInventory pi = p.getInventory();
         if(enabled()) {
             if (arena != null) {
-                ItemStack is = new ItemStack(plugin.versions.getWoodSword());
-                if (e.getItemDrop().getItemStack().getType() == plugin.versions.getWoodSword()) {
+                ItemStack is = new ItemStack(Objects.requireNonNull(XMaterial.WOODEN_SWORD.parseItem()));
+                if (e.getItemDrop().getItemStack().getType() == XMaterial.WOODEN_SWORD.parseMaterial()) {
                     e.setCancelled(true);
                 }
-                if (getSwords(e.getPlayer()) == 0 && e.getItemDrop().getItemStack().getType() != plugin.versions.getWoodSword()) {
+                if (getSwords(e.getPlayer()) == 0 &&
+                        e.getItemDrop().getItemStack().getType() != XMaterial.WOODEN_SWORD.parseMaterial()) {
                     final ItemStack item = e.getItemDrop().getItemStack();
                     ItemMeta meta = item.getItemMeta();
+                    assert meta != null;
                     meta.setDisplayName("Wooden Sword");
                     is.setItemMeta(meta);
                     //tries to put sword in slot player dropped sword from
@@ -46,16 +50,17 @@ public class SwordDrop implements Listener {
 
     @EventHandler
     public void replaceSwordOnCollect(PlayerPickupItemEvent e){
-        Main plugin = Main.getInstance();
         Player p = e.getPlayer();
         Arena arena = BedwarsAPI.getGameAPI().getArenaByPlayer(p);
         PlayerInventory pi = p.getInventory();
         ItemStack sword = e.getItem().getItemStack();
         if(enabled()) {
             if(arena != null) {
-                if(swordList().contains(e.getItem().getItemStack().getType().name())) {
-                    if(pi.contains(plugin.versions.getWoodSword())) {
-                        pi.remove(plugin.versions.getWoodSword());
+                if(swordList().contains(sword.getType().name()) &&
+                        IgnoreItemStack.isNotToIgnore(sword)) {
+                    assert XMaterial.WOODEN_SWORD.parseMaterial() != null;
+                    if(pi.contains(XMaterial.WOODEN_SWORD.parseMaterial())) {
+                        pi.remove(XMaterial.WOODEN_SWORD.parseMaterial());
                     }
                     e.setCancelled(true);
                     pi.addItem(sword);
@@ -69,7 +74,8 @@ public class SwordDrop implements Listener {
         int count = 0;
         for(ItemStack item : player.getInventory().getContents()) {
             if(item != null)
-                if(item.getType().name().endsWith("SWORD")){
+                if(item.getType().name().endsWith("SWORD") &&
+                        IgnoreItemStack.isNotToIgnore(item)){
                     count++;
                 }
         }

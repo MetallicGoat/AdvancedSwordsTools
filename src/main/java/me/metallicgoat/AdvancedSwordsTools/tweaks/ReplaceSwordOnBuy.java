@@ -4,16 +4,17 @@ import de.marcely.bedwars.api.event.player.PlayerBuyInShopEvent;
 import de.marcely.bedwars.api.game.shop.product.ItemShopProduct;
 import de.marcely.bedwars.api.game.shop.product.ShopProduct;
 import me.metallicgoat.AdvancedSwordsTools.Main;
+import me.metallicgoat.AdvancedSwordsTools.utils.IgnoreItemStack;
+import me.metallicgoat.AdvancedSwordsTools.utils.XMaterial;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public class SwordBuy implements Listener {
+public class ReplaceSwordOnBuy implements Listener {
     @EventHandler
     public void onSwordBuy(PlayerBuyInShopEvent e){
-        Main plugin = Main.getInstance();
         Player p = e.getPlayer();
         PlayerInventory pi = p.getInventory();
         if(e.getProblems().isEmpty() && replace()){
@@ -22,7 +23,7 @@ public class SwordBuy implements Listener {
                 if(rawProduct instanceof ItemShopProduct){
                     final ItemStack[] is = ((ItemShopProduct) rawProduct).getItemStacks();
                     for(ItemStack item:is){
-                        if(item.getType().name().endsWith("SWORD")){
+                        if(item.getType().name().endsWith("SWORD") && IgnoreItemStack.isNotToIgnore(item)){
                             //Clear Wooden Swords
                             if(allType()){
                                 pi.forEach(itemStack -> {
@@ -33,7 +34,8 @@ public class SwordBuy implements Listener {
                                     }
                                 });
                             }else {
-                                pi.remove(plugin.versions.getWoodSword());
+                                assert XMaterial.WOODEN_SWORD.parseMaterial() != null;
+                                pi.remove(XMaterial.WOODEN_SWORD.parseMaterial());
                             }
                         }
                         break;

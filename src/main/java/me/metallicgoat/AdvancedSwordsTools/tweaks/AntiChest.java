@@ -2,6 +2,7 @@ package me.metallicgoat.AdvancedSwordsTools.tweaks;
 
 import de.marcely.bedwars.api.BedwarsAPI;
 import me.metallicgoat.AdvancedSwordsTools.Main;
+import me.metallicgoat.AdvancedSwordsTools.utils.IgnoreItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,7 +22,7 @@ public class AntiChest implements Listener {
                 Inventory clicked = e.getClickedInventory();
                 if (clicked == e.getWhoClicked().getInventory()) {
                     ItemStack clickedOn = e.getCurrentItem();
-                    if (clickedOn != null && (getAntiChest().contains(clickedOn.getType().name()))) {
+                    if (clickedOn != null && (getAntiChest().contains(clickedOn.getType().name())) && IgnoreItemStack.isNotToIgnore(clickedOn)) {
                         e.setCancelled(true);
                     }
                 }
@@ -35,7 +36,7 @@ public class AntiChest implements Listener {
             if (clicked != e.getWhoClicked().getInventory() && inArena((Player) e.getWhoClicked())) {
                 // The cursor item is going into the top inventory
                 ItemStack onCursor = e.getCursor();
-                if (onCursor != null && (getAntiChest().contains(onCursor.getType().name()))) {
+                if (onCursor != null && (getAntiChest().contains(onCursor.getType().name())) && IgnoreItemStack.isNotToIgnore(onCursor)) {
                     e.setCancelled(true);
                 }
             }
@@ -44,7 +45,7 @@ public class AntiChest implements Listener {
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent e) {
         ItemStack dragged = e.getOldCursor();
-        if (getAntiChest().contains(dragged.getType().name()) && inArena((Player) e.getWhoClicked())) {
+        if (getAntiChest().contains(dragged.getType().name()) && inArena((Player) e.getWhoClicked()) && IgnoreItemStack.isNotToIgnore(dragged)) {
             int inventorySize = e.getInventory().getSize(); // The size of the inventory, for reference
             // Now we go through all of the slots and check if the slot is inside our inventory (using the inventory size as reference)
             for (int i : e.getRawSlots()) {

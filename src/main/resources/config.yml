@@ -35,9 +35,17 @@ Anti-Drop:
     - 'DIAMOND_AXE'
     - 'SHEARS'
 
+#With this feature enabled players can only have one tool of a specific type at a time
+#Players will not be able to downgrade their tool if the is enabled
+#(Tool Mechanics like Hypixel)
 Advanced-Tool-Replacement:
   enabled: true
-  problem: 'You already have a higher tier'
+  problem: 'You already have the same, or higher tier'
+
+#Prevents players from buying multiple of the same swords, or lower tier swords
+Ordered-Sword-Buy:
+  enabled: false
+  problem: 'You already have the same, or higher tier'
 
 #Players will always have a sword if this is enabled
 #Gives you a Wooden Sword if no sword is detected
@@ -49,7 +57,13 @@ Advanced-Sword-Drop:
     - 'DIAMOND_SWORD'
 
 #Removes a Wooden-Sword if you buy a better sword
-#If 'all-type' is set to true, all sword types will get replaced.
+#If 'all-type' is set to TRUE, ALL sword types will get replaced.
 Replace-Sword-On-Buy:
   enabled: true
   all-type: false
+
+#Add Items here that you do not want to be effected by Advanced Swords and Tools
+#For example, A custom special item
+#ADD ITEMS BY THEIR DISPLAY NAME (INCLUDE COLOUR CODES)
+Do-Not-Effect:
+  - ''

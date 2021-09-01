@@ -22,4 +22,9 @@ public interface Config {
 
     boolean getToolBuy();
 
+    boolean getOrderedSwordBuy();
+
+    String getOrderedSwordBuyProblem();
+
+    List<String> getIgnoreList();
 }
