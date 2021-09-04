@@ -15,12 +15,22 @@ public class IgnoreItemStack {
         AtomicBoolean isNotToIgnore = new AtomicBoolean(true);
         if(meta != null) {
             getIgnoreList().forEach(s -> {
-                String formatted = ChatColor.translateAlternateColorCodes('&', s);
-                if(formatted.equals(meta.getDisplayName()) && !s.equals("")){
+                if(s.equals(ChatColor.stripColor(meta.getDisplayName())) && !s.equals("")) {
                     isNotToIgnore.set(false);
                 }
             });
         }
+        return isNotToIgnore.get();
+    }
+
+    public static boolean isNotToIgnore(String name){
+        AtomicBoolean isNotToIgnore = new AtomicBoolean(true);
+        getIgnoreList().forEach(s -> {
+            String formatted = ChatColor.translateAlternateColorCodes('&', s);
+            if(formatted.equals(name) && !s.equals("")){
+                isNotToIgnore.set(false);
+            }
+        });
         return isNotToIgnore.get();
     }
 

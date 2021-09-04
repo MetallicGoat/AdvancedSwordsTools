@@ -64,6 +64,6 @@ Replace-Sword-On-Buy:
 
 #Add Items here that you do not want to be effected by Advanced Swords and Tools
 #For example, A custom special item
-#ADD ITEMS BY THEIR DISPLAY NAME (INCLUDE COLOUR CODES)
+#ADD ITEMS BY THEIR DISPLAY NAME (DO NOT COLOUR CODES)
 Do-Not-Effect:
   - ''

@@ -40,15 +40,17 @@ public class AlwaysSword implements Listener {
                         //if someone has an extra wood sword, remove it
                         if (hasGoodSword(p)) {
                             for (ItemStack s : pi.getContents()) {
-                                if (s != null && s.getType().equals(XMaterial.WOODEN_SWORD.parseMaterial()) && IgnoreItemStack.isNotToIgnore(s)) {
+                                if (s != null && s.getType().equals(XMaterial.WOODEN_SWORD.parseMaterial()) &&
+                                        IgnoreItemStack.isNotToIgnore(s)) {
                                     pi.remove(s);
                                 }
                             }
                             // If someone somehow gets two wood swords, only remove one
                         } else {
                             for (ItemStack s : pi.getContents()) {
-                                if (s != null && s.getType().equals(XMaterial.WOODEN_SWORD.parseMaterial()) && IgnoreItemStack.isNotToIgnore(s)) {
-                                    s.setType(Material.AIR);
+                                if (s != null && s.getType().equals(XMaterial.WOODEN_SWORD.parseMaterial()) &&
+                                        IgnoreItemStack.isNotToIgnore(s)) {
+                                    pi.remove(s);
                                     break;
                                 }
                             }
@@ -72,7 +74,7 @@ public class AlwaysSword implements Listener {
         int count = 0;
         for (ItemStack item : player.getInventory().getContents()) {
             if(item != null)
-                if (item.getType().name().endsWith("SWORD")){
+                if (item.getType().name().endsWith("SWORD") && IgnoreItemStack.isNotToIgnore(item)){
                     count++;
                 }
         }
@@ -84,7 +86,7 @@ public class AlwaysSword implements Listener {
         final Inventory pi = player.getInventory();
         for(ItemStack s:pi.getContents()){
             if(s != null){
-                if(s.getType().name().endsWith("SWORD")){
+                if(s.getType().name().endsWith("SWORD") && IgnoreItemStack.isNotToIgnore(s)){
                     if(!s.equals(new ItemStack(Objects.requireNonNull(XMaterial.WOODEN_SWORD.parseItem())))){
                         return true;
                     }
