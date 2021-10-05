@@ -26,7 +26,8 @@ public class OrderedSwordBuy implements Listener {
                 if (rawProduct instanceof ItemShopProduct) {
                     final ItemStack[] is = ((ItemShopProduct) rawProduct).getItemStacks();
                     for (ItemStack item : is) {
-                        if (item.getType().name().contains("SWORD") && IgnoreItemStack.isNotToIgnore(e.getItem().getDisplayName())) {
+                        if (item.getType().name().contains("SWORD") &&
+                                IgnoreItemStack.isNotToIgnore(e.getItem().getDisplayName())) {
                             if (!isPurchasable(item, pi)) {
                                 addShopProblem(e);
                             } else {

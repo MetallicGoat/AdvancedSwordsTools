@@ -2,6 +2,7 @@ package me.metallicgoat.AdvancedSwordsTools.tweaks;
 
 import de.marcely.bedwars.api.BedwarsAPI;
 import de.marcely.bedwars.api.arena.Arena;
+import de.marcely.bedwars.api.arena.ArenaStatus;
 import me.metallicgoat.AdvancedSwordsTools.Main;
 import me.metallicgoat.AdvancedSwordsTools.utils.IgnoreItemStack;
 import me.metallicgoat.AdvancedSwordsTools.utils.XMaterial;
@@ -25,7 +26,7 @@ public class SwordDrop implements Listener {
         Arena arena = BedwarsAPI.getGameAPI().getArenaByPlayer(p);
         PlayerInventory pi = p.getInventory();
         if(enabled()) {
-            if (arena != null) {
+            if (arena != null && arena.getStatus() == ArenaStatus.RUNNING) {
                 ItemStack is = new ItemStack(Objects.requireNonNull(XMaterial.WOODEN_SWORD.parseItem()));
                 if (e.getItemDrop().getItemStack().getType() == XMaterial.WOODEN_SWORD.parseMaterial()) {
                     e.setCancelled(true);

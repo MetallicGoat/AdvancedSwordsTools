@@ -8,7 +8,6 @@ import me.metallicgoat.AdvancedSwordsTools.utils.IgnoreItemStack;
 import me.metallicgoat.AdvancedSwordsTools.utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

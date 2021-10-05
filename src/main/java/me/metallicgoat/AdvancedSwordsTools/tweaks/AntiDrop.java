@@ -2,6 +2,7 @@ package me.metallicgoat.AdvancedSwordsTools.tweaks;
 
 import de.marcely.bedwars.api.BedwarsAPI;
 import de.marcely.bedwars.api.arena.Arena;
+import de.marcely.bedwars.api.arena.ArenaStatus;
 import me.metallicgoat.AdvancedSwordsTools.Main;
 import me.metallicgoat.AdvancedSwordsTools.utils.IgnoreItemStack;
 import org.bukkit.entity.Player;
@@ -17,7 +18,7 @@ public class AntiDrop implements Listener {
         Player p = e.getPlayer();
         Arena arena = BedwarsAPI.getGameAPI().getArenaByPlayer(p);
         // If player is trying to dop a tool he shouldn't, cancel event
-        if(arena != null) {
+        if(arena != null && arena.getStatus() == ArenaStatus.RUNNING) {
             if (antiDropList().contains(e.getItemDrop().getItemStack().getType().name()) &&
                     antiDrop() &&
                     IgnoreItemStack.isNotToIgnore(e.getItemDrop().getItemStack())) {
