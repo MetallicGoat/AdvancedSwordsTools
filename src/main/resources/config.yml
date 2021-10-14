@@ -63,7 +63,7 @@ Replace-Sword-On-Buy:
   all-type: false
 
 #Add Items here that you do not want to be effected by Advanced Swords and Tools
-#For example, A custom special item
-#ADD ITEMS BY THEIR DISPLAY NAME (DO NOT COLOUR CODES)
+#For example, A CUSTOM special item that is Golden Sword
+#ADD ITEMS BY THEIR DISPLAY NAME (DO NOT include COLOUR CODES)
 Do-Not-Effect:
   - ''

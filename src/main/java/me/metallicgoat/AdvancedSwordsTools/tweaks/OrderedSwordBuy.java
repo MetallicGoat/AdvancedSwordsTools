@@ -45,8 +45,9 @@ public class OrderedSwordBuy implements Listener {
     private void clearOld(Material tool, Player p){
         p.getInventory().forEach(itemStack -> {
             if(itemStack != null){
-                if(getSwordLevel(tool.name()) > getSwordLevel(itemStack.getType().name())){
-                    p.getInventory().remove(itemStack.getType());
+                if(itemStack.getType().name().contains("SWORD")
+                        && getSwordLevel(tool.name()) > getSwordLevel(itemStack.getType().name())){
+                    p.getInventory().remove(itemStack);
                 }
             }
         });
